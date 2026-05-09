@@ -47,12 +47,24 @@ export function Hero() {
     >
       {/* Background Texture & Parallax */}
       <motion.div 
-        className="absolute inset-0 bg-texture z-0 pointer-events-none"
+        className="absolute inset-0 z-0 pointer-events-none bg-deep"
         style={{ y: yBg }}
       >
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen"
+        >
+          {/* Futuristic Digital Network requested by user */}
+          <source src="https://videos.pexels.com/video-files/30767274/13161041_1920_1080_30fps.mp4" type="video/mp4" />
+        </video>
+
         {/* Cinematic reflections / lighting gradients */}
+        <div className="absolute inset-0 bg-deep/40 mix-blend-multiply"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,#0A1428_0%,transparent_70%)] opacity-40"></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-chrome opacity-5 blur-[120px] rounded-full rotate-12"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-chrome opacity-10 blur-[120px] rounded-full rotate-12"></div>
       </motion.div>
 
       {/* Floating Particles (Low density) */}
@@ -88,24 +100,59 @@ export function Hero() {
       >
         {/* Logo / Shape */}
         <motion.div 
-          className="mb-12 w-24 h-24 relative flex items-center justify-center"
+          className="mb-12 relative flex items-center justify-center"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         >
-          <motion.div 
-            className="absolute inset-0 border-[0.5px] border-chrome/40"
-            animate={{ rotate: 360, borderRadius: ["0%", "50%", "25%", "0%"] }}
+          {/* Inner pulsating glow */}
+          <motion.div
+            className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl z-0"
+            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          {/* Precision Ring 1 */}
+          <motion.div
+            className="absolute w-32 h-32 border-[0.5px] border-chrome/30 rounded-full z-0"
+            animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            style={{ borderTopColor: "transparent", borderRightColor: "transparent" }}
           />
-          <motion.div 
-            className="absolute inset-2 border-[0.5px] border-chrome/20"
-            animate={{ rotate: -360, borderRadius: ["50%", "0%", "50%", "50%"] }}
+
+          {/* Precision Ring 2 */}
+          <motion.div
+            className="absolute w-28 h-28 border border-white/10 rounded-full z-0"
+            animate={{ rotate: -360 }}
             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            style={{ borderBottomColor: "transparent", borderLeftColor: "transparent" }}
           />
-          <h2 className="font-display font-medium text-xl tracking-[0.4em] text-offwhite ml-2">
-            N
-          </h2>
+
+          {/* Static Core N */}
+          <svg viewBox="0 0 100 100" className="w-16 h-16 text-offwhite relative z-10 overflow-visible">
+            {/* The 'N' character stylized */}
+            <motion.path
+               d="M 30 80 L 30 20 L 70 80 L 70 20"
+               stroke="url(#chrome-gradient-hero)"
+               strokeWidth="4"
+               fill="none"
+               strokeLinecap="square"
+               initial={{ pathLength: 0 }}
+               animate={{ pathLength: 1 }}
+               transition={{ duration: 2.5, ease: "easeInOut" }}
+            />
+            {/* Dots at vertices */}
+            <motion.circle cx="30" cy="80" r="3" fill="#FAFAFA" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} />
+            <motion.circle cx="70" cy="20" r="3" fill="#FAFAFA" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} />
+
+            <defs>
+              <linearGradient id="chrome-gradient-hero" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#FAFAFA" />
+                <stop offset="50%" stopColor="#B0B0B0" />
+                <stop offset="100%" stopColor="#505050" />
+              </linearGradient>
+            </defs>
+          </svg>
         </motion.div>
 
         {/* Title */}

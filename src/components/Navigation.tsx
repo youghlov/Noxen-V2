@@ -32,9 +32,22 @@ export function Navigation() {
         transition={{ duration: 1, ease: "easeOut" }}
       >
         <div className="font-display font-bold tracking-[0.2em] uppercase text-2xl text-offwhite flex items-center gap-3">
-          <div className="w-8 h-8 border-2 border-chrome rotate-45 flex items-center justify-center">
-            <div className="w-3 h-3 bg-offwhite" />
-          </div>
+          <svg viewBox="0 0 100 100" className="w-8 h-8 text-offwhite overflow-visible">
+            <path
+               d="M 30 80 L 30 20 L 70 80 L 70 20"
+               stroke="url(#nav-chrome-gradient)"
+               strokeWidth="8"
+               fill="none"
+               strokeLinecap="square"
+            />
+            <defs>
+              <linearGradient id="nav-chrome-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#FAFAFA" />
+                <stop offset="50%" stopColor="#B0B0B0" />
+                <stop offset="100%" stopColor="#505050" />
+              </linearGradient>
+            </defs>
+          </svg>
           Noxen
         </div>
 
