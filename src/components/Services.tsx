@@ -33,7 +33,7 @@ export function Services() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="expertise" className="relative w-full min-h-screen py-32 bg-deep text-white overflow-hidden">
+    <section id="expertise" className="relative w-full min-h-screen py-16 bg-deep text-white overflow-hidden">
       {/* Decorative background element */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-midnight rounded-full blur-[150px] opacity-20 pointer-events-none" />
 

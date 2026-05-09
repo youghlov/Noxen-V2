@@ -8,7 +8,7 @@ export function Contact() {
   const handleBlur = () => setFocusedInput(null);
 
   return (
-    <section id="contact" className="relative w-full min-h-screen py-32 bg-deep flex items-center justify-center overflow-hidden">
+    <section id="contact" className="relative w-full min-h-screen py-16 bg-deep flex items-center justify-center overflow-hidden">
       
       {/* Animated Subtle Grid Lines inside a Neural-like network */}
       <div className="absolute inset-0 pointer-events-none opacity-20">

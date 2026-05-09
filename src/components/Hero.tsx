@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
+import { Hexagon, Layers, Aperture, Code } from "lucide-react";
 
 const textRevealContainer = {
   hidden: { opacity: 0 },
@@ -192,29 +193,41 @@ export function Hero() {
           Branding, design, contenu digital, et web immersif. Production visuelle tech-assistée pour l'avant-garde.
         </motion.p>
 
-        {/* Magnetic CTA */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
-          className="mt-16"
+        {/* Services Icons */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 0.8 }}
+          className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12"
         >
-          <MagneticButton>
-            <div className="group relative">
-               <div className="absolute inset-0 bg-midnight blur-xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-               <button className="magnetic relative px-10 py-4 bg-offwhite text-deep text-xs font-bold uppercase tracking-[0.2em] flex items-center gap-4 transition-transform duration-300">
-                 <span className="relative z-10 flex items-center gap-2">
-                   Découvrir l'Agence
-                   <motion.span
-                     animate={{ x: [0, 5, 0] }}
-                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                   >
-                     →
-                   </motion.span>
-                 </span>
-               </button>
+          {/* Branding */}
+          <div className="flex flex-col items-center gap-4 group cursor-crosshair">
+             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Hexagon className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
              </div>
-          </MagneticButton>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">Branding</span>
+          </div>
+          {/* Design UI/UX */}
+          <div className="flex flex-col items-center gap-4 group cursor-crosshair">
+             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Layers className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
+             </div>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">UI/UX Luxe</span>
+          </div>
+          {/* Contenu Digital */}
+          <div className="flex flex-col items-center gap-4 group cursor-crosshair">
+             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Aperture className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
+             </div>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">Contenu</span>
+          </div>
+          {/* Web Immersif */}
+          <div className="flex flex-col items-center gap-4 group cursor-crosshair">
+             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Code className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
+             </div>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">Immersif</span>
+          </div>
         </motion.div>
 
       </motion.div>
@@ -230,36 +243,5 @@ export function Hero() {
       </motion.div>
 
     </section>
-  );
-}
-
-// Magnetic Button Wrapper
-function MagneticButton({ children }: { children: React.ReactElement }) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const ref = useRef<HTMLDivElement>(null);
-
-  const handleMouse = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current!.getBoundingClientRect();
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    setPosition({ x: middleX * 0.3, y: middleY * 0.3 });
-  };
-
-  const reset = () => {
-    setPosition({ x: 0, y: 0 });
-  };
-
-  const { x, y } = position;
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-      animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-    >
-      {children}
-    </motion.div>
   );
 }

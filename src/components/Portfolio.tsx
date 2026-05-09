@@ -9,7 +9,7 @@ export function Portfolio() {
     <section 
       id="portfolio" 
       ref={containerRef} 
-      className="relative z-10 w-full py-32 bg-deep border-t border-white/5"
+      className="relative z-10 w-full py-16 bg-deep border-t border-white/5"
     >
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">

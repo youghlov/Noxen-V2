@@ -23,10 +23,10 @@ export function About() {
   const containerRef = useRef<HTMLDivElement>(null);
   
   return (
-    <section id="vision" ref={containerRef} className="relative w-full py-40 mb-20 bg-deep border-t border-white/5 overflow-hidden">
+    <section id="vision" ref={containerRef} className="relative w-full py-16 bg-deep border-t border-white/5 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-6 relative">
         
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div className="max-w-2xl">
             <span className="text-chrome font-sans tracking-[0.3em] uppercase text-xs mb-6 block">Le Modèle Noxen</span>
             <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-offwhite leading-[1.1]">
