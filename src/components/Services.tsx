@@ -1,30 +1,27 @@
 import { motion, useInView } from "motion/react";
 import { useRef, MouseEvent } from "react";
+import { Fingerprint, Cuboid, Sparkles, LayoutTemplate } from "lucide-react";
 
 const services = [
   {
-    number: "01",
+    Icon: Fingerprint,
     title: "Branding Tech",
     desc: "Identités visuelles générées et optimisées pour le digital. Systèmes de design évolutifs.",
-    icon: "❖"
   },
   {
-    number: "02",
+    Icon: Cuboid,
     title: "Web Immersif",
     desc: "Expériences Awwwards-winning avec WebGL, Three.js et animations GSAP fluides.",
-    icon: "◒"
   },
   {
-    number: "03",
+    Icon: Sparkles,
     title: "Contenu Digital",
     desc: "Production visuelle premium, motion design 3D et assets IA créatifs.",
-    icon: "✦"
   },
   {
-    number: "04",
+    Icon: LayoutTemplate,
     title: "UI/UX Luxe",
     desc: "Interfaces minimalistes, parcours utilisateurs millimétrés et design behavioriel.",
-    icon: "⊚"
   }
 ];
 
@@ -59,7 +56,7 @@ export function Services() {
           </div>
           <motion.p 
             className="text-chrome/70 max-w-sm font-sans font-light text-sm"
-            initial={{ opacity: 0, opacity: 0 }}
+            initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
@@ -129,9 +126,9 @@ function ServiceCard({ service, index, isInView }: { service: any, index: number
         <div className="card-light absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100 mix-blend-screen" />
         
         <div className="flex flex-col transform-gpu" style={{ transform: 'translateZ(30px)' }}>
-          <span className="font-sans text-chrome text-[10px] uppercase tracking-widest mb-4 block">
-            {service.number} / {service.icon}
-          </span>
+          <div className="text-chrome/50 group-hover:text-chrome transition-colors duration-500 mb-6 block">
+            <service.Icon className="w-8 h-8" strokeWidth={1} />
+          </div>
           <h3 className="font-display text-lg font-bold uppercase mb-2 text-offwhite group-hover:text-white transition-colors duration-500">
             {service.title}
           </h3>

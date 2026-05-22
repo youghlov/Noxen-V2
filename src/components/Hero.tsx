@@ -99,90 +99,49 @@ export function Hero() {
         className="relative z-10 flex flex-col items-center max-w-7xl mx-auto px-6 text-center"
         style={{ opacity: opacityText }}
       >
-        {/* Logo / Shape */}
-        <motion.div 
-          className="mb-12 relative flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        >
-          {/* Inner pulsating glow */}
-          <motion.div
-            className="absolute inset-0 bg-blue-500/20 rounded-full blur-2xl z-0"
-            animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0.6, 0.3] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          />
-
-          {/* Precision Ring 1 */}
-          <motion.div
-            className="absolute w-32 h-32 border-[0.5px] border-chrome/30 rounded-full z-0"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            style={{ borderTopColor: "transparent", borderRightColor: "transparent" }}
-          />
-
-          {/* Precision Ring 2 */}
-          <motion.div
-            className="absolute w-28 h-28 border border-white/10 rounded-full z-0"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            style={{ borderBottomColor: "transparent", borderLeftColor: "transparent" }}
-          />
-
-          {/* Static Core N */}
-          <svg viewBox="0 0 100 100" className="w-16 h-16 text-offwhite relative z-10 overflow-visible">
-            {/* The 'N' character stylized */}
-            <motion.path
-               d="M 30 80 L 30 20 L 70 80 L 70 20"
-               stroke="url(#chrome-gradient-hero)"
-               strokeWidth="4"
-               fill="none"
-               strokeLinecap="square"
-               initial={{ pathLength: 0 }}
-               animate={{ pathLength: 1 }}
-               transition={{ duration: 2.5, ease: "easeInOut" }}
-            />
-            {/* Dots at vertices */}
-            <motion.circle cx="30" cy="80" r="3" fill="#FAFAFA" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} />
-            <motion.circle cx="70" cy="20" r="3" fill="#FAFAFA" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }} />
-
-            <defs>
-              <linearGradient id="chrome-gradient-hero" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#FAFAFA" />
-                <stop offset="50%" stopColor="#B0B0B0" />
-                <stop offset="100%" stopColor="#505050" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </motion.div>
-
         {/* Title */}
         <motion.div
-          variants={textRevealContainer}
-          initial="hidden"
-          animate="visible"
-          className="overflow-hidden flex flex-wrap justify-center font-display font-black text-[15vw] md:text-[110px] leading-[0.9] tracking-tighter uppercase max-w-[90vw]"
-        >
-          {Array.from("Digital Experiences").map((letter, index) => (
-            <motion.span 
-              variants={textRevealChild} 
-              key={`w1_${index}`}
-              className={letter === " " ? "w-6 md:w-10" : "text-offwhite relative group"}
-            >
-              {letter}
-            </motion.span>
-          ))}
-          <div className="w-full h-2 md:h-4" /> {/* Line Break */}
-          {Array.from("Premium").map((letter, index) => (
-             <motion.span 
-             variants={textRevealChild} 
-             key={`w2_${index}`}
-             className="text-gradient-chrome"
-           >
-             {letter}
-           </motion.span>
-          ))}
-        </motion.div>
+           variants={textRevealContainer}
+           initial="hidden"
+           animate="visible"
+           className="flex flex-col items-center justify-center font-display font-black text-[10vw] md:text-[90px] leading-[0.9] tracking-tighter uppercase max-w-[90vw] glitch-text gap-2 md:gap-0"
+         >
+           <div className="flex flex-wrap justify-center">
+             {Array.from("L'expérience").map((letter, index) => (
+               <motion.span 
+                 variants={textRevealChild} 
+                 key={`w0_${index}`}
+                 className={letter === " " || letter === "'" ? "w-4 md:w-6 flex-shrink-0" : "text-offwhite relative group"}
+               >
+                 {letter}
+               </motion.span>
+             ))}
+           </div>
+           
+           <div className="flex flex-wrap justify-center">
+             {Array.from("digitale").map((letter, index) => (
+               <motion.span 
+                 variants={textRevealChild} 
+                 key={`w1_${index}`}
+                 className={letter === " " ? "w-6 md:w-8 flex-shrink-0" : "text-offwhite relative group"}
+               >
+                 {letter}
+               </motion.span>
+             ))}
+           </div>
+           
+           <div className="flex flex-wrap justify-center">
+             {Array.from("Premium").map((letter, index) => (
+               <motion.span 
+                 variants={textRevealChild} 
+                 key={`w2_${index}`}
+                 className="text-gradient-chrome"
+               >
+                 {letter}
+               </motion.span>
+             ))}
+           </div>
+         </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}

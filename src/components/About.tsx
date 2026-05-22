@@ -1,22 +1,75 @@
 import { motion, useScroll, useTransform, useInView } from "motion/react";
 import { useRef } from "react";
+import RadialOrbitalTimeline, { TimelineItem } from "./ui/radial-orbital-timeline";
+import { Sparkles, Lightbulb, Minimize2, Eye, Globe, User } from "lucide-react";
 
-const features = [
-  { 
-    id: "01",
-    title: "Vision", 
-    desc: "Nous croyons que l'interface est le nouveau lieu de culte des marques. Chaque interaction doit être un événement." 
+const timelineData: TimelineItem[] = [
+  {
+    id: 1,
+    title: "Créativité",
+    date: "Axe 1",
+    content: "Idéation hors des sentiers battus pour concevoir des identités uniques et mémorables.",
+    category: "Visuel",
+    icon: Sparkles,
+    relatedIds: [2, 4],
+    status: "completed",
+    energy: 95,
   },
-  { 
-    id: "02",
-    title: "Méthode", 
-    desc: "Design behavioriel couplé à une architecture full-stack robuste. Nous ne faisons pas de sites, nous forgeons des expériences." 
+  {
+    id: 2,
+    title: "Innovation",
+    date: "Axe 2",
+    content: "Exploration technologique continue pour repousser les limites du possible en digital.",
+    category: "Tech",
+    icon: Lightbulb,
+    relatedIds: [1, 5],
+    status: "completed",
+    energy: 90,
   },
-  { 
-    id: "03",
-    title: "Résultat", 
-    desc: "Des métriques augmentées, un engagement sublimé, une identité ancrée dans l'avant-garde numérique." 
-  }
+  {
+    id: 3,
+    title: "Minimalisme",
+    date: "Axe 3",
+    content: "Épuration du design pour ne garder que l'essentiel et sublimer l'expérience.",
+    category: "Design",
+    icon: Minimize2,
+    relatedIds: [4, 6],
+    status: "completed",
+    energy: 85,
+  },
+  {
+    id: 4,
+    title: "Excellence visuelle",
+    date: "Axe 4",
+    content: "Direction artistique haut de gamme avec une obsession pour les détails parfaits.",
+    category: "Visuel",
+    icon: Eye,
+    relatedIds: [1, 3],
+    status: "completed",
+    energy: 100,
+  },
+  {
+    id: 5,
+    title: "Culture digitale",
+    date: "Axe 5",
+    content: "Compréhension profonde des codes et des usages d'internet et des réseaux.",
+    category: "Culture",
+    icon: Globe,
+    relatedIds: [2, 6],
+    status: "in-progress",
+    energy: 80,
+  },
+  {
+    id: 6,
+    title: "Expérience utilisateur",
+    date: "Axe 6",
+    content: "Parcours utilisateur fluide, intuitif et sans friction pour maximiser la conversion.",
+    category: "Design",
+    icon: User,
+    relatedIds: [3, 5],
+    status: "completed",
+    energy: 90,
+  },
 ];
 
 export function About() {
@@ -30,38 +83,21 @@ export function About() {
           <div className="max-w-2xl">
             <span className="text-chrome font-sans tracking-[0.3em] uppercase text-xs mb-6 block">Le Modèle Noxen</span>
             <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-offwhite leading-[1.1]">
-              L'Exigence <br className="hidden md:block"/> 
-              <span className="text-chrome">par le Code</span>
+              Créer l’impact <br className="hidden md:block"/> 
+              <span className="text-chrome">digital</span>
             </h2>
           </div>
           <p className="max-w-sm text-sm font-light leading-relaxed text-chrome/80">
-            Une approche radicale qui fusionne ingénierie de précision et direction artistique d'avant-garde pour concevoir les standards de demain.
+            Créer des expériences digitales premium qui fusionnent créativité, culture et technologie afin d’aider les marques modernes à se démarquer.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {features.map((feature, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              transition={{ duration: 0.6, delay: idx * 0.15, ease: "easeOut" }}
-              className="bg-anthracite/30 border border-white/5 p-10 flex flex-col justify-between min-h-[320px] group hover:bg-white/5 transition-all duration-500"
-            >
-              <div className="font-sans text-xs text-chrome/50 tracking-widest">{feature.id}</div>
-              
-              <div>
-                <h3 className="font-display text-2xl uppercase text-offwhite font-bold mb-6 group-hover:translate-x-2 transition-transform duration-300">
-                  {feature.title}
-                </h3>
-                <p className="font-sans text-sm font-light leading-relaxed text-chrome group-hover:text-chrome/90 transition-colors">
-                  {feature.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+        {/* Timeline Effect Section */}
+        <div className="relative flex min-h-[600px] w-full items-center justify-center py-20">
+          <RadialOrbitalTimeline timelineData={timelineData} />
+          <div className="absolute bottom-0 z-[41] h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         </div>
+
       </div>
     </section>
   );

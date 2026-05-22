@@ -1,20 +1,52 @@
 import React from 'react';
 
 export const ImageAutoSlider = () => {
-  // Images for the infinite scroll - using Unsplash URLs
-  const images = [
-    "https://images.unsplash.com/photo-1518495973542-4542c06a5843?q=80&w=1974&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1472396961693-142e6e269027?q=80&w=2152&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=2126&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1482881497185-d4a9ddbe4151?q=80&w=1965&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1673264933212-d78737f38e48?q=80&w=1974&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1711434824963-ca894373272e?q=80&w=2030&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1675705721263-0bbeec261c49?q=80&w=1940&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1524799526615-766a9833dec0?q=80&w=1935&auto=format&fit=crop"
+  // Project data for the infinite scroll
+  const projects = [
+    {
+      url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+      title: "FinTrack UI",
+      category: "Dashboard Design"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop",
+      title: "Archetype Site",
+      category: "Creative Portfolio"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+      title: "Lumina Labs",
+      category: "Visual Identity"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2071&auto=format&fit=crop",
+      title: "Nexus Brand",
+      category: "Media Strategy"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1545235617-9465d2a55698?q=80&w=2080&auto=format&fit=crop",
+      title: "EcoSphere",
+      category: "Web Immersif"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop",
+      title: "Stellar App",
+      category: "Digital Product"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1964&auto=format&fit=crop",
+      title: "Mirage Studio",
+      category: "Brand Identity"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=2070&auto=format&fit=crop",
+      title: "Aura Platform",
+      category: "UI/UX Luxe"
+    }
   ];
 
-  // Duplicate images for seamless loop
-  const duplicatedImages = [...images, ...images];
+  // Duplicate projects for seamless loop
+  const duplicatedProjects = [...projects, ...projects];
 
   return (
     <>
@@ -50,12 +82,15 @@ export const ImageAutoSlider = () => {
         }
 
         .image-item {
-          transition: transform 0.5s ease, filter 0.5s ease;
+          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease, border-color 0.6s ease;
+          will-change: transform, filter;
         }
 
         .image-item:hover {
-          transform: scale(1.02);
-          filter: brightness(1.2) grayscale(0) !important;
+          transform: scale(1.05);
+          filter: brightness(1.1) grayscale(0) !important;
+          border-color: rgba(255, 255, 255, 0.2);
+          z-index: 20;
         }
       `}</style>
       
@@ -65,17 +100,27 @@ export const ImageAutoSlider = () => {
         <div className="relative z-10 w-full flex items-center justify-center py-8">
           <div className="scroll-container w-full">
             <div className="infinite-scroll flex gap-6 w-max">
-              {duplicatedImages.map((image, index) => (
+              {duplicatedProjects.map((project, index) => (
                 <div
                   key={index}
-                  className="image-item flex-shrink-0 w-64 h-80 md:w-80 md:h-[400px] border border-white/5 overflow-hidden"
+                  className="image-item flex-shrink-0 w-64 h-80 md:w-80 md:h-[400px] border border-white/5 overflow-hidden relative group"
                 >
                   <img
-                    src={image}
-                    alt={`Archive image ${(index % images.length) + 1}`}
-                    className="w-full h-full object-cover grayscale opacity-60 hover:opacity-100"
+                    src={project.url}
+                    alt={project.title}
+                    className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 ease-out"
                     loading="lazy"
                   />
+                  
+                  {/* Caption Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                    <h4 className="text-offwhite font-display text-lg font-bold uppercase tracking-wider mb-1">
+                      {project.title}
+                    </h4>
+                    <span className="text-[10px] text-chrome/60 uppercase tracking-[0.2em] font-sans">
+                      {project.category}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

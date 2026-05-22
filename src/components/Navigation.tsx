@@ -31,24 +31,11 @@ export function Navigation() {
         animate={{ y: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
       >
-        <div className="font-display font-bold tracking-[0.2em] uppercase text-2xl text-offwhite flex items-center gap-3">
-          <svg viewBox="0 0 100 100" className="w-8 h-8 text-offwhite overflow-visible">
-            <path
-               d="M 30 80 L 30 20 L 70 80 L 70 20"
-               stroke="url(#nav-chrome-gradient)"
-               strokeWidth="8"
-               fill="none"
-               strokeLinecap="square"
-            />
-            <defs>
-              <linearGradient id="nav-chrome-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#FAFAFA" />
-                <stop offset="50%" stopColor="#B0B0B0" />
-                <stop offset="100%" stopColor="#505050" />
-              </linearGradient>
-            </defs>
+        <div className="font-display font-bold tracking-[0.4em] uppercase text-xl text-offwhite flex items-center gap-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter" className="w-7 h-7 text-offwhite">
+            <path d="M5 21V3l14 18V3" />
           </svg>
-          Noxen
+          <span className="hidden sm:inline">Noxen</span>
         </div>
 
         {/* Desktop Nav */}

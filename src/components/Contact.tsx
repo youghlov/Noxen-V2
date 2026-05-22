@@ -3,9 +3,23 @@ import { useState } from "react";
 
 export function Contact() {
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   const handleFocus = (name: string) => setFocusedInput(name);
   const handleBlur = () => setFocusedInput(null);
+
+  const toggleService = (service: string) => {
+    setSelectedServices(prev => 
+      prev.includes(service) ? prev.filter(s => s !== service) : [...prev, service]
+    );
+  };
+
+  const servicesOptions = [
+    "Branding Tech",
+    "Web Immersif",
+    "Contenu Digital",
+    "UI/UX Luxe"
+  ];
 
   return (
     <section id="contact" className="relative w-full min-h-screen py-16 bg-deep flex items-center justify-center overflow-hidden">
@@ -54,6 +68,29 @@ export function Contact() {
               onFocus={() => handleFocus('email')} 
               onBlur={handleBlur} 
             />
+
+            {/* Services Multi-Select */}
+            <div className="flex flex-col gap-4">
+              <label className="font-sans tracking-wider uppercase text-xs text-chrome/40">
+                Services Requis
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {servicesOptions.map((service) => (
+                  <button
+                    key={service}
+                    type="button"
+                    onClick={() => toggleService(service)}
+                    className={`px-4 py-2 rounded-full border border-white/10 text-xs font-sans tracking-wider uppercase transition-all duration-300 ${
+                      selectedServices.includes(service)
+                        ? "bg-chrome text-deep border-chrome"
+                        : "text-offwhite/70 hover:border-chrome/50 hover:text-offwhite"
+                    }`}
+                  >
+                    {service}
+                  </button>
+                ))}
+              </div>
+            </div>
             
             <div className="relative w-full">
               <label 

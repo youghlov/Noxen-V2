@@ -14,14 +14,14 @@ export function Portfolio() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
           <div>
-            <span className="text-[10px] uppercase tracking-[0.4em] text-chrome mb-4 block">Archive</span>
-            <h3 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-offwhite">
-              Selected Works
+            <span className="text-[10px] uppercase tracking-[0.4em] text-chrome mb-4 block">Projets</span>
+            <h3 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-offwhite max-w-2xl">
+              Des Identités Pensées<br className="hidden md:block" /> Pour Demain
             </h3>
           </div>
-          <button className="px-6 py-2 border border-chrome text-[10px] uppercase tracking-widest hover:bg-offwhite hover:text-deep transition-all duration-300 mt-6 md:mt-0 magnetic">
-            Voir Tout
-          </button>
+          <p className="max-w-sm text-sm font-light leading-relaxed text-chrome/80 mt-6 md:mt-0 text-left md:text-right">
+            Chaque projet est conçu comme une expérience visuelle immersive mêlant créativité, stratégie et innovation.
+          </p>
         </div>
       </div>
       

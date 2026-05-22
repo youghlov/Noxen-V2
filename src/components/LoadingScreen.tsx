@@ -32,21 +32,18 @@ export function LoadingScreen({ onComplete }: { onComplete: () => void }) {
       animate={{ clipPath: "circle(100% at 50% 50%)" }}
     >
       <div className="relative flex flex-col items-center">
-        {/* Logo Morphing (simplistic approximation using scaled shapes) */}
+        {/* Minimalist Logo Animation */}
         <motion.div 
-          className="w-16 h-16 border border-chrome mb-12 flex items-center justify-center overflow-hidden"
-          animate={{
-            borderRadius: ["0%", "50%", "20%", "0%"],
-            rotate: [0, 90, 180, 270, 360],
-          }}
-          transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
+          className="w-16 h-16 mb-12 flex items-center justify-center overflow-visible"
         >
-          <motion.div 
-            className="w-8 h-8 bg-offwhite"
-            initial={{ scale: 0 }}
-            animate={{ scale: [0, 1, 0.5, 1], rotate: [0, -90, -180, -270, -360] }}
-            transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
-          />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter" className="w-16 h-16 text-offwhite">
+            <motion.path 
+              d="M5 21V3l14 18V3"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 1 }}
+              transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+            />
+          </svg>
         </motion.div>
 
         {/* Text */}
