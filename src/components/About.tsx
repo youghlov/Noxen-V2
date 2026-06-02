@@ -84,7 +84,7 @@ export function About() {
             <span className="text-chrome font-sans tracking-[0.3em] uppercase text-xs mb-6 block">Le Modèle Noxen</span>
             <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter text-offwhite leading-[1.1]">
               Créer l’impact <br className="hidden md:block"/> 
-              <span className="text-chrome">digital</span>
+              <span className="text-noxen drop-shadow-[0_0_15px_rgba(246,133,31,0.3)]">digital</span>
             </h2>
           </div>
           <p className="max-w-sm text-sm font-light leading-relaxed text-chrome/80">

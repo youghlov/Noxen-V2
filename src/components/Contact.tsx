@@ -138,8 +138,8 @@ export function Contact() {
                     onClick={() => toggleService(service)}
                     className={`px-4 py-2 rounded-full border border-white/10 text-xs font-sans tracking-wider uppercase transition-all duration-300 ${
                       selectedServices.includes(service)
-                        ? "bg-chrome text-deep border-chrome"
-                        : "text-offwhite/70 hover:border-chrome/50 hover:text-offwhite"
+                        ? "bg-noxen text-deep border-noxen shadow-[0_0_10px_rgba(246,133,31,0.5)]"
+                        : "text-offwhite/70 hover:border-noxen/50 hover:text-noxen"
                     }`}
                   >
                     {service}
@@ -175,7 +175,7 @@ export function Contact() {
             <button 
               type="submit"
               disabled={isSubmitting}
-              className="w-full mt-4 py-4 border border-chrome/30 text-chrome font-sans uppercase tracking-[0.2em] text-xs hover:bg-offwhite hover:text-deep transition-all duration-300 magnetic rounded-full relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full mt-4 py-4 border border-noxen/50 text-noxen font-sans uppercase tracking-[0.2em] text-xs hover:bg-noxen hover:text-deep transition-all duration-300 magnetic rounded-full relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_10px_rgba(246,133,31,0)] hover:shadow-[0_0_20px_rgba(246,133,31,0.4)]"
             >
               <span className="relative z-10 transition-colors">
                 {isSubmitting ? "Transmission..." : submitStatus === 'success' ? "Message Envoyé" : "Transmettre"}

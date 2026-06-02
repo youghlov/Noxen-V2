@@ -209,7 +209,7 @@ export default function RadialOrbitalTimeline({
                     isPulsing ? "animate-pulse-orbital duration-1000" : ""
                   }`}
                   style={{
-                    background: `radial-gradient(circle, rgba(176,176,176,0.15) 0%, rgba(176,176,176,0) 70%)`,
+                    background: isExpanded ? `radial-gradient(circle, rgba(246,133,31,0.25) 0%, rgba(246,133,31,0) 70%)` : `radial-gradient(circle, rgba(176,176,176,0.15) 0%, rgba(176,176,176,0) 70%)`,
                     width: `${item.energy * 0.5 + 40}px`,
                     height: `${item.energy * 0.5 + 40}px`,
                     left: `-${(item.energy * 0.5 + 40 - 40) / 2}px`,
@@ -223,7 +223,7 @@ export default function RadialOrbitalTimeline({
                   w-10 h-10 rounded-full flex items-center justify-center
                   ${
                     isExpanded
-                      ? "bg-offwhite text-deep"
+                      ? "bg-noxen text-deep"
                       : isRelated
                       ? "bg-chrome/50 text-deep"
                       : "bg-deep text-chrome"
@@ -231,10 +231,10 @@ export default function RadialOrbitalTimeline({
                   border-2 
                   ${
                     isExpanded
-                      ? "border-offwhite shadow-lg shadow-offwhite/10"
+                      ? "border-noxen shadow-[0_0_15px_rgba(246,133,31,0.5)]"
                       : isRelated
                       ? "border-chrome animate-pulse-orbital"
-                      : "border-chrome/30"
+                      : "border-chrome/30 hover:border-noxen/50 hover:text-noxen transition-colors"
                   }
                   transition-all duration-300 transform
                   ${isExpanded ? "scale-125" : ""}
@@ -292,7 +292,7 @@ export default function RadialOrbitalTimeline({
                         </div>
                         <div className="w-full h-[2px] bg-white/10 overflow-hidden">
                           <div
-                            className="h-full bg-chrome transition-all duration-1000"
+                            className="h-full bg-noxen transition-all duration-1000 shadow-[0_0_10px_#F6851F]"
                             style={{ width: `${item.energy}%` }}
                           ></div>
                         </div>

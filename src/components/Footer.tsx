@@ -14,7 +14,7 @@ export function Footer() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-midnight border border-blue-500/50 shadow-[0_0_8px_#0055ff]"></div>
+          <div className="w-2 h-2 rounded-full bg-midnight border border-noxen shadow-[0_0_8px_#F6851F] animate-pulse"></div>
           <span>Système Opérationnel</span>
         </div>
       </div>

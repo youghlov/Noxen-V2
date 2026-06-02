@@ -6,7 +6,6 @@ const navItems = [
   { name: "Expertise", href: "#expertise" },
   { name: "Projets", href: "#projets" },
   { name: "Vision", href: "#vision" },
-  { name: "Contact", href: "#contact" },
 ];
 
 export function Navigation() {
@@ -32,9 +31,7 @@ export function Navigation() {
         transition={{ duration: 1, ease: "easeOut" }}
       >
         <div className="font-display font-bold tracking-[0.4em] uppercase text-xl text-offwhite flex items-center gap-4">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" strokeLinejoin="miter" className="w-7 h-7 text-offwhite">
-            <path d="M5 21V3l14 18V3" />
-          </svg>
+          <img src="/logo.svg" alt="Noxen Logo" className="h-8 md:h-10 w-auto object-contain" />
           <span className="hidden sm:inline">Noxen</span>
         </div>
 
@@ -44,12 +41,12 @@ export function Navigation() {
             <a 
               key={i} 
               href={item.href}
-              className={`relative group font-sans ${i === 0 ? "text-offwhite border-b border-offwhite pb-1" : "text-offwhite/40 hover:text-offwhite transition-colors"}`}
+              className={`relative group font-sans ${i === 0 ? "text-noxen border-b border-noxen pb-1 drop-shadow-[0_0_8px_rgba(246,133,31,0.5)]" : "text-offwhite/40 hover:text-noxen transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(246,133,31,0.5)]"}`}
             >
               {item.name}
             </a>
           ))}
-          <a href="#contact" className="px-6 py-2 border border-chrome text-[10px] uppercase tracking-widest hover:bg-offwhite hover:text-deep transition-all duration-300 ml-4 magnetic">
+          <a href="#contact" className="px-6 py-2 border border-noxen/50 text-noxen text-[10px] uppercase tracking-widest hover:bg-noxen hover:border-noxen hover:text-deep transition-all duration-300 ml-4 magnetic hover:shadow-[0_0_15px_rgba(246,133,31,0.4)]">
             Contact
           </a>
         </div>
@@ -88,7 +85,7 @@ export function Navigation() {
               key={i}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="font-display font-light text-3xl tracking-wide uppercase text-offwhite hover:text-chrome transition-colors"
+              className="font-display font-light text-3xl tracking-wide uppercase text-offwhite hover:text-noxen hover:drop-shadow-[0_0_15px_rgba(246,133,31,0.5)] transition-all duration-300"
               initial={{ opacity: 0, y: 20 }}
               animate={isOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: isOpen ? 0.3 + i * 0.1 : 0 }}

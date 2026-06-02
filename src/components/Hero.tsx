@@ -135,7 +135,7 @@ export function Hero() {
                <motion.span 
                  variants={textRevealChild} 
                  key={`w2_${index}`}
-                 className="text-gradient-chrome"
+                 className="text-noxen drop-shadow-[0_0_15px_rgba(246,133,31,0.5)]"
                >
                  {letter}
                </motion.span>
@@ -161,31 +161,31 @@ export function Hero() {
         >
           {/* Branding */}
           <div className="flex flex-col items-center gap-4 group cursor-crosshair">
-             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
-               <Hexagon className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
+             <div className="w-16 h-16 border border-white/10 group-hover:border-noxen/50 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Hexagon className="w-6 h-6 text-chrome group-hover:text-noxen transition-colors duration-500" strokeWidth={1} />
              </div>
-             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">Branding</span>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-noxen font-sans transition-colors duration-500">Branding</span>
           </div>
           {/* Design UI/UX */}
           <div className="flex flex-col items-center gap-4 group cursor-crosshair">
-             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
-               <Layers className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
+             <div className="w-16 h-16 border border-white/10 group-hover:border-noxen/50 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Layers className="w-6 h-6 text-chrome group-hover:text-noxen transition-colors duration-500" strokeWidth={1} />
              </div>
-             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">UI/UX Luxe</span>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-noxen font-sans transition-colors duration-500">UI/UX Luxe</span>
           </div>
           {/* Contenu Digital */}
           <div className="flex flex-col items-center gap-4 group cursor-crosshair">
-             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
-               <Aperture className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
+             <div className="w-16 h-16 border border-white/10 group-hover:border-noxen/50 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Aperture className="w-6 h-6 text-chrome group-hover:text-noxen transition-colors duration-500" strokeWidth={1} />
              </div>
-             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">Contenu</span>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-noxen font-sans transition-colors duration-500">Contenu</span>
           </div>
           {/* Web Immersif */}
           <div className="flex flex-col items-center gap-4 group cursor-crosshair">
-             <div className="w-16 h-16 border border-white/10 group-hover:border-white/40 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
-               <Code className="w-6 h-6 text-chrome group-hover:text-offwhite transition-colors duration-500" strokeWidth={1} />
+             <div className="w-16 h-16 border border-white/10 group-hover:border-noxen/50 flex items-center justify-center bg-anthracite/10 backdrop-blur-md transition-all duration-500">
+               <Code className="w-6 h-6 text-chrome group-hover:text-noxen transition-colors duration-500" strokeWidth={1} />
              </div>
-             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-chrome font-sans transition-colors duration-500">Immersif</span>
+             <span className="text-[10px] uppercase tracking-[0.2em] text-chrome/60 group-hover:text-noxen font-sans transition-colors duration-500">Immersif</span>
           </div>
         </motion.div>
 

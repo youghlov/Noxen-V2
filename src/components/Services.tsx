@@ -51,7 +51,7 @@ export function Services() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Créativité<br /><span className="font-bold text-gradient-chrome">Augmentée</span>
+              Créativité<br /><span className="font-bold text-noxen drop-shadow-[0_0_15px_rgba(246,133,31,0.3)]">Augmentée</span>
             </motion.h2>
           </div>
           <motion.p 
@@ -126,13 +126,13 @@ function ServiceCard({ service, index, isInView }: { service: any, index: number
         <div className="card-light absolute inset-0 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100 mix-blend-screen" />
         
         <div className="flex flex-col transform-gpu" style={{ transform: 'translateZ(30px)' }}>
-          <div className="text-chrome/50 group-hover:text-chrome transition-colors duration-500 mb-6 block">
-            <service.Icon className="w-8 h-8" strokeWidth={1} />
+          <div className="text-chrome/50 group-hover:text-noxen transition-colors duration-500 mb-6 block">
+            <service.Icon className="w-8 h-8 drop-shadow-[0_0_10px_rgba(246,133,31,0)] group-hover:drop-shadow-[0_0_15px_rgba(246,133,31,0.5)] transition-all duration-500" strokeWidth={1} />
           </div>
           <h3 className="font-display text-lg font-bold uppercase mb-2 text-offwhite group-hover:text-white transition-colors duration-500">
             {service.title}
           </h3>
-          <div className="w-8 h-[1px] bg-chrome group-hover:w-full transition-all duration-500" />
+          <div className="w-8 h-[1px] bg-chrome group-hover:bg-noxen group-hover:w-full transition-all duration-500" />
         </div>
 
         <div className="transform-gpu mt-4" style={{ transform: 'translateZ(50px)' }}>
