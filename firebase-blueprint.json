@@ -1,0 +1,23 @@
+{
+  "entities": {
+    "ContactSubmission": {
+      "title": "Contact Submission",
+      "description": "A contact form submission from a user",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name or company of sender" },
+        "email": { "type": "string", "description": "Email address of sender" },
+        "services": { "type": "array", "items": { "type": "string" }, "description": "Selected services" },
+        "project": { "type": "string", "description": "Project details" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["name", "email", "services", "project", "createdAt"]
+    }
+  },
+  "firestore": {
+    "contact_submissions/{submissionId}": {
+      "schema": { "$ref": "#/entities/ContactSubmission" },
+      "description": "Collection of contact form submissions"
+    }
+  }
+}

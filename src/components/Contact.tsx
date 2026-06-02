@@ -1,9 +1,14 @@
 import { motion } from "motion/react";
 import { useState } from "react";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db, handleFirestoreError, OperationType } from "../lib/firebase";
 
 export function Contact() {
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [formData, setFormData] = useState({ name: '', email: '', project: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleFocus = (name: string) => setFocusedInput(name);
   const handleBlur = () => setFocusedInput(null);
@@ -12,6 +17,53 @@ export function Contact() {
     setSelectedServices(prev => 
       prev.includes(service) ? prev.filter(s => s !== service) : [...prev, service]
     );
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.project) {
+      alert("Veuillez remplir tous les champs obligatoires.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      await addDoc(collection(db, "contact_submissions"), {
+        name: formData.name,
+        email: formData.email,
+        services: selectedServices,
+        project: formData.project,
+        createdAt: serverTimestamp()
+      });
+
+      // Send email via our backend route
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          services: selectedServices,
+          project: formData.project
+        })
+      });
+
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', project: '' });
+      setSelectedServices([]);
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    } catch (error) {
+      setSubmitStatus('error');
+      handleFirestoreError(error, OperationType.CREATE, "contact_submissions");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const servicesOptions = [
@@ -49,14 +101,16 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
         >
           <div className="flex flex-col gap-8">
             <InputField 
               name="name" 
               type="text" 
               label="Nom / Entreprise" 
-              isFocused={focusedInput === 'name'} 
+              value={formData.name}
+              onChange={handleChange}
+              isFocused={focusedInput === 'name' || formData.name.length > 0} 
               onFocus={() => handleFocus('name')} 
               onBlur={handleBlur} 
             />
@@ -64,7 +118,9 @@ export function Contact() {
               name="email" 
               type="email" 
               label="Email de contact" 
-              isFocused={focusedInput === 'email'} 
+              value={formData.email}
+              onChange={handleChange}
+              isFocused={focusedInput === 'email' || formData.email.length > 0} 
               onFocus={() => handleFocus('email')} 
               onBlur={handleBlur} 
             />
@@ -94,11 +150,14 @@ export function Contact() {
             
             <div className="relative w-full">
               <label 
-                className={`absolute left-0 transition-all duration-300 font-sans tracking-wider uppercase text-xs pointer-events-none ${focusedInput === 'project' ? '-top-5 text-chrome' : 'top-2 text-chrome/40'}`}
+                className={`absolute left-0 transition-all duration-300 font-sans tracking-wider uppercase text-xs pointer-events-none ${focusedInput === 'project' || formData.project.length > 0 ? '-top-5 text-chrome' : 'top-2 text-chrome/40'}`}
               >
                 Votre Projet
               </label>
               <textarea 
+                name="project"
+                value={formData.project}
+                onChange={handleChange}
                 rows={4}
                 className="w-full bg-transparent border-b border-white/10 text-offwhite font-sans text-sm pb-2 pt-2 focus:outline-none resize-none"
                 onFocus={() => handleFocus('project')}
@@ -113,10 +172,27 @@ export function Contact() {
               />
             </div>
 
-            <button className="w-full mt-4 py-4 border border-chrome/30 text-chrome font-sans uppercase tracking-[0.2em] text-xs hover:bg-offwhite hover:text-deep transition-all duration-300 magnetic rounded-full relative overflow-hidden group">
-              <span className="relative z-10 transition-colors">Transmettre</span>
+            <button 
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full mt-4 py-4 border border-chrome/30 text-chrome font-sans uppercase tracking-[0.2em] text-xs hover:bg-offwhite hover:text-deep transition-all duration-300 magnetic rounded-full relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span className="relative z-10 transition-colors">
+                {isSubmitting ? "Transmission..." : submitStatus === 'success' ? "Message Envoyé" : "Transmettre"}
+              </span>
               <div className="absolute inset-0 bg-white/10 blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
+
+            {submitStatus === 'success' && (
+              <p className="text-center text-xs text-green-400 font-sans tracking-widest uppercase mt-[-10px]">
+                Nous vous contacterons bientôt.
+              </p>
+            )}
+            {submitStatus === 'error' && (
+              <p className="text-center text-xs text-red-400 font-sans tracking-widest uppercase mt-[-10px]">
+                Erreur lors de l'envoi. Veuillez réessayer.
+              </p>
+            )}
           </div>
         </motion.form>
       </div>
@@ -124,7 +200,7 @@ export function Contact() {
   );
 }
 
-function InputField({ name, type, label, isFocused, onFocus, onBlur }: { name: string, type: string, label: string, isFocused: boolean, onFocus: () => void, onBlur: () => void }) {
+function InputField({ name, type, label, value, onChange, isFocused, onFocus, onBlur }: { name: string, type: string, label: string, value: string, onChange: (e: React.ChangeEvent<HTMLInputElement>) => void, isFocused: boolean, onFocus: () => void, onBlur: () => void }) {
   return (
     <div className="relative w-full">
       <label 
@@ -133,7 +209,10 @@ function InputField({ name, type, label, isFocused, onFocus, onBlur }: { name: s
         {label}
       </label>
       <input 
+        name={name}
         type={type} 
+        value={value}
+        onChange={onChange}
         className="w-full bg-transparent border-b border-white/10 text-offwhite font-sans text-sm pb-2 pt-2 focus:outline-none"
         onFocus={onFocus}
         onBlur={onBlur}
@@ -157,3 +236,4 @@ function InputField({ name, type, label, isFocused, onFocus, onBlur }: { name: s
     </div>
   );
 }
+

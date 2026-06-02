@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
+import nodemailer from "nodemailer";
 
 async function startServer() {
   const app = express();
@@ -14,9 +15,48 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
-  // Example API route
-  app.get("/api/message", (req, res) => {
-    res.json({ message: "Hello from the backend!" });
+  // Email API route
+  app.post("/api/send-email", async (req, res) => {
+    const { name, email, services, project } = req.body;
+
+    const smtpEmail = process.env.SMTP_EMAIL;
+    const smtpPassword = process.env.SMTP_PASSWORD;
+
+    if (!smtpEmail || !smtpPassword) {
+      return res.status(500).json({ error: "SMTP credentials are not configured on the server." });
+    }
+
+    try {
+      const transporter = nodemailer.createTransport({
+        service: "gmail", // Can be adjusted depending on the provider
+        auth: {
+          user: smtpEmail,
+          pass: smtpPassword,
+        },
+      });
+
+      const mailOptions = {
+        from: `"${name}" <${smtpEmail}>`, // sender address
+        to: "edarts.blida@gmail.com", // receiver address
+        replyTo: email,
+        subject: `Nouveau message de contact : ${name}`, // Subject line
+        text: `Nom: ${name}\nEmail: ${email}\nServices: ${services.join(', ')}\nProjet:\n${project}`,
+        html: `
+          <h2>Nouveau message depuis le formulaire de contact</h2>
+          <p><strong>Nom / Entreprise :</strong> ${name}</p>
+          <p><strong>Email :</strong> ${email}</p>
+          <p><strong>Services souhaités :</strong> ${services.length > 0 ? services.join(', ') : 'Aucun'}</p>
+          <p><strong>Description du projet :</strong></p>
+          <p>${project.replace(/\n/g, '<br/>')}</p>
+        `,
+      };
+
+      await transporter.sendMail(mailOptions);
+      res.json({ success: true, message: "Email sent successfully" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      res.status(500).json({ error: "Failed to send email" });
+    }
   });
 
   // Vite middleware for development
