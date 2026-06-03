@@ -54,7 +54,7 @@ export function Pricing() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section className="relative w-full py-24 bg-deep/95 text-white border-t border-white/5 overflow-hidden">
+    <section id="pricing" className="relative w-full py-24 bg-deep/95 text-white border-t border-white/5 overflow-hidden">
        {/* Background ambient lighting */}
        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[500px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-noxen/5 via-transparent to-transparent opacity-60 pointer-events-none" />
 
