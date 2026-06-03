@@ -241,7 +241,12 @@ a, button, input, textarea, select, .magnetic {
   10% { transform: translate(0); filter: none; }
 }
 
-.glitch-text {
-  animation: text-glitch 5s infinite normal linear;
-  display: inline-block;
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
+
+.animate-marquee-scroll {
+  animation: marquee-scroll 40s linear infinite;
+}
+
