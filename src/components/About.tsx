@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useInView } from "motion/react";
 import { useRef } from "react";
-import RadialOrbitalTimeline, { TimelineItem } from "./ui/radial-orbital-timeline";
+import CyberNodes from "./ui/cyber-nodes";
+import { TimelineItem } from "./ui/radial-orbital-timeline";
 import { Sparkles, Lightbulb, Minimize2, Eye, Globe, User } from "lucide-react";
 
 const timelineData: TimelineItem[] = [
@@ -93,9 +94,8 @@ export function About() {
         </div>
 
         {/* Timeline Effect Section */}
-        <div className="relative flex min-h-[600px] w-full items-center justify-center py-20">
-          <RadialOrbitalTimeline timelineData={timelineData} />
-          <div className="absolute bottom-0 z-[41] h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="relative flex min-h-[600px] w-full items-center justify-center py-20 mt-10">
+          <CyberNodes timelineData={timelineData} />
         </div>
 
       </div>

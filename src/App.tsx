@@ -16,6 +16,7 @@ import { Portfolio } from "./components/Portfolio";
 import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { Pricing } from "./components/Pricing";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -62,6 +63,7 @@ export default function App() {
           <Navigation />
           <Hero />
           <Services />
+          <Pricing />
           <Portfolio />
           <About />
           <Contact />
