@@ -1,75 +1,62 @@
 import { motion, useScroll, useTransform, useInView } from "motion/react";
 import { useRef } from "react";
-import CyberNodes from "./ui/cyber-nodes";
-import { TimelineItem } from "./ui/radial-orbital-timeline";
+import { BentoGrid, type BentoItem } from "./ui/bento-grid";
 import { Sparkles, Lightbulb, Minimize2, Eye, Globe, User } from "lucide-react";
 
-const timelineData: TimelineItem[] = [
+const bentoItems: BentoItem[] = [
   {
-    id: 1,
     title: "Créativité",
-    date: "Axe 1",
-    content: "Idéation hors des sentiers battus pour concevoir des identités uniques et mémorables.",
-    category: "Visuel",
-    icon: Sparkles,
-    relatedIds: [2, 4],
-    status: "completed",
-    energy: 95,
+    meta: "Axe 1",
+    description: "Idéation hors des sentiers battus pour concevoir des identités uniques et mémorables.",
+    icon: <Sparkles className="w-5 h-5" strokeWidth={1.5} />,
+    status: "Actif",
+    tags: ["Visuel", "Identité"],
+    colSpan: 1,
   },
   {
-    id: 2,
-    title: "Innovation",
-    date: "Axe 2",
-    content: "Exploration technologique continue pour repousser les limites du possible en digital.",
-    category: "Tech",
-    icon: Lightbulb,
-    relatedIds: [1, 5],
-    status: "completed",
-    energy: 90,
+    title: "Innovation Tech",
+    meta: "Axe 2",
+    description: "Exploration technologique continue pour repousser les limites du possible en digital.",
+    icon: <Lightbulb className="w-5 h-5" strokeWidth={1.5} />,
+    status: "En cours",
+    tags: ["Tech", "Web3"],
+    colSpan: 2,
+    hasPersistentHover: true,
   },
   {
-    id: 3,
+    title: "Excellence Visuelle",
+    meta: "Axe 4",
+    description: "Direction artistique haut de gamme avec une obsession pour les détails parfaits.",
+    icon: <Eye className="w-5 h-5" strokeWidth={1.5} />,
+    tags: ["DA", "Luxe"],
+    colSpan: 2,
+  },
+  {
     title: "Minimalisme",
-    date: "Axe 3",
-    content: "Épuration du design pour ne garder que l'essentiel et sublimer l'expérience.",
-    category: "Design",
-    icon: Minimize2,
-    relatedIds: [4, 6],
-    status: "completed",
-    energy: 85,
+    meta: "Axe 3",
+    description: "Épuration du design pour ne garder que l'essentiel et sublimer l'expérience.",
+    icon: <Minimize2 className="w-5 h-5" strokeWidth={1.5} />,
+    status: "Actif",
+    tags: ["Design", "Épuré"],
+    colSpan: 1,
   },
   {
-    id: 4,
-    title: "Excellence visuelle",
-    date: "Axe 4",
-    content: "Direction artistique haut de gamme avec une obsession pour les détails parfaits.",
-    category: "Visuel",
-    icon: Eye,
-    relatedIds: [1, 3],
-    status: "completed",
-    energy: 100,
+    title: "Culture Digitale",
+    meta: "Axe 5",
+    description: "Compréhension profonde des codes et des usages d'internet et des réseaux.",
+    icon: <Globe className="w-5 h-5" strokeWidth={1.5} />,
+    status: "Analysé",
+    tags: ["Social", "Tendances"],
+    colSpan: 1,
   },
   {
-    id: 5,
-    title: "Culture digitale",
-    date: "Axe 5",
-    content: "Compréhension profonde des codes et des usages d'internet et des réseaux.",
-    category: "Culture",
-    icon: Globe,
-    relatedIds: [2, 6],
-    status: "in-progress",
-    energy: 80,
-  },
-  {
-    id: 6,
-    title: "Expérience utilisateur",
-    date: "Axe 6",
-    content: "Parcours utilisateur fluide, intuitif et sans friction pour maximiser la conversion.",
-    category: "Design",
-    icon: User,
-    relatedIds: [3, 5],
-    status: "completed",
-    energy: 90,
+    title: "Expérience Utilisateur",
+    meta: "Axe 6",
+    description: "Parcours utilisateur fluide, intuitif et sans friction pour maximiser la conversion.",
+    icon: <User className="w-5 h-5" strokeWidth={1.5} />,
+    status: "Optimisé",
+    tags: ["UX/UI", "Conversion"],
+    colSpan: 2,
   },
 ];
 
@@ -77,8 +64,8 @@ export function About() {
   const containerRef = useRef<HTMLDivElement>(null);
   
   return (
-    <section id="vision" ref={containerRef} className="relative w-full py-16 bg-deep border-t border-white/5 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto px-6 relative">
+    <section id="vision" ref={containerRef} className="relative w-full py-24 bg-deep border-t border-white/5 overflow-hidden">
+      <div className="max-w-[1200px] mx-auto px-6 relative z-10">
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div className="max-w-2xl">
@@ -93,9 +80,9 @@ export function About() {
           </p>
         </div>
 
-        {/* Timeline Effect Section */}
-        <div className="relative flex min-h-[600px] w-full items-center justify-center py-20 mt-10">
-          <CyberNodes timelineData={timelineData} />
+        {/* Bento Grid Section */}
+        <div className="relative w-full mt-12">
+          <BentoGrid items={bentoItems} />
         </div>
 
       </div>
