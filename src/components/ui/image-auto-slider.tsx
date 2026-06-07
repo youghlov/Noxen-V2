@@ -45,88 +45,81 @@ export const ImageAutoSlider = () => {
     }
   ];
 
-  // Duplicate projects for seamless loop
-  const duplicatedProjects = [...projects, ...projects];
-
   return (
-    <>
-      <style>{`
-        @keyframes scroll-left {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
+    <div className="w-full relative py-10 flex overflow-x-hidden group">
+      {/* Gradient masks for seamless edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-r from-deep to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 md:w-64 bg-gradient-to-l from-deep to-transparent z-10 pointer-events-none" />
 
-        .infinite-scroll {
-          animation: scroll-left 30s linear infinite;
-        }
+      <div className="flex w-max animate-marquee-scroll group-hover:[animation-play-state:paused]">
+        {/* First instance */}
+        <div className="flex gap-6 pr-6">
+          {projects.map((project, index) => (
+            <div
+              key={`first-${index}`}
+              className="relative w-[300px] md:w-[450px] aspect-[4/3] flex-shrink-0 group/card overflow-hidden border border-white/10 hover:border-noxen/50 transition-all duration-500 rounded-lg bg-black box-border hover:shadow-[0_0_30px_rgba(246,133,31,0.15)] cursor-pointer"
+            >
+               <img 
+                 src={project.url} 
+                 alt={project.title} 
+                 className="w-full h-full object-cover opacity-60 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-700 ease-out"
+                 loading="lazy"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent opacity-90 group-hover/card:opacity-70 transition-opacity duration-500 pointer-events-none" />
+               
+               <div className="absolute bottom-0 left-0 p-6 translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500 pointer-events-none">
+                 <span className="font-mono text-[10px] uppercase tracking-widest text-noxen mb-2 block opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 drop-shadow-[0_0_5px_rgba(246,133,31,0.5)]">
+                   {project.category}
+                 </span>
+                 <h4 className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight text-white mb-1">
+                   {project.title}
+                 </h4>
+               </div>
 
-        .scroll-container {
-          mask: linear-gradient(
-            90deg,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%
-          );
-          -webkit-mask: linear-gradient(
-            90deg,
-            transparent 0%,
-            black 10%,
-            black 90%,
-            transparent 100%
-          );
-        }
-
-        .image-item {
-          transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.6s ease, border-color 0.6s ease;
-          will-change: transform, filter;
-        }
-
-        .image-item:hover {
-          transform: scale(1.05);
-          filter: brightness(1.1) grayscale(0) !important;
-          border-color: rgba(255, 255, 255, 0.2);
-          z-index: 20;
-        }
-      `}</style>
-      
-      <div className="w-full relative overflow-hidden flex items-center justify-center py-10">
-        
-        {/* Scrolling images container */}
-        <div className="relative z-10 w-full flex items-center justify-center py-8">
-          <div className="scroll-container w-full">
-            <div className="infinite-scroll flex gap-6 w-max">
-              {duplicatedProjects.map((project, index) => (
-                <div
-                  key={index}
-                  className="image-item flex-shrink-0 w-64 h-80 md:w-80 md:h-[400px] border border-white/5 overflow-hidden relative group"
-                >
-                  <img
-                    src={project.url}
-                    alt={project.title}
-                    className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 ease-out"
-                    loading="lazy"
-                  />
-                  
-                  {/* Caption Overlay */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    <h4 className="text-offwhite font-display text-lg font-bold uppercase tracking-wider mb-1">
-                      {project.title}
-                    </h4>
-                    <span className="text-[10px] text-chrome/60 uppercase tracking-[0.2em] font-sans">
-                      {project.category}
-                    </span>
-                  </div>
-                </div>
-              ))}
+               {/* Top right decorative glow */}
+               <div className="absolute top-0 right-0 w-32 h-32 bg-noxen blur-[60px] opacity-0 group-hover/card:opacity-20 transition-opacity duration-500 pointer-events-none" />
+               
+               {/* Decorative Corner brackets */}
+               <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-chrome/10 group-hover/card:border-noxen/50 transition-colors duration-500 z-20 m-4 pointer-events-none" />
+               <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-chrome/10 group-hover/card:border-noxen/50 transition-colors duration-500 z-20 m-4 pointer-events-none" />
             </div>
-          </div>
+          ))}
+        </div>
+        
+        {/* Second instance for seamless loop */}
+        <div className="flex gap-6 pr-6">
+          {projects.map((project, index) => (
+            <div
+              key={`second-${index}`}
+              className="relative w-[300px] md:w-[450px] aspect-[4/3] flex-shrink-0 group/card overflow-hidden border border-white/10 hover:border-noxen/50 transition-all duration-500 rounded-lg bg-black box-border hover:shadow-[0_0_30px_rgba(246,133,31,0.15)] cursor-pointer"
+            >
+               <img 
+                 src={project.url} 
+                 alt={project.title} 
+                 className="w-full h-full object-cover opacity-60 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-700 ease-out"
+                 loading="lazy"
+               />
+               <div className="absolute inset-0 bg-gradient-to-t from-deep/90 via-deep/20 to-transparent opacity-90 group-hover/card:opacity-70 transition-opacity duration-500 pointer-events-none" />
+               
+               <div className="absolute bottom-0 left-0 p-6 translate-y-4 group-hover/card:translate-y-0 transition-transform duration-500 pointer-events-none">
+                 <span className="font-mono text-[10px] uppercase tracking-widest text-noxen mb-2 block opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 drop-shadow-[0_0_5px_rgba(246,133,31,0.5)]">
+                   {project.category}
+                 </span>
+                 <h4 className="font-display text-xl md:text-2xl font-bold uppercase tracking-tight text-white mb-1">
+                   {project.title}
+                 </h4>
+               </div>
+
+               {/* Top right decorative glow */}
+               <div className="absolute top-0 right-0 w-32 h-32 bg-noxen blur-[60px] opacity-0 group-hover/card:opacity-20 transition-opacity duration-500 pointer-events-none" />
+               
+               {/* Decorative Corner brackets */}
+               <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-chrome/10 group-hover/card:border-noxen/50 transition-colors duration-500 z-20 m-4 pointer-events-none" />
+               <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-chrome/10 group-hover/card:border-noxen/50 transition-colors duration-500 z-20 m-4 pointer-events-none" />
+            </div>
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };

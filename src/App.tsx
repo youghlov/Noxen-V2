@@ -17,7 +17,6 @@ import { About } from "./components/About";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { Pricing } from "./components/Pricing";
-import { BehanceGallery } from "./components/BehanceGallery";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -65,7 +64,6 @@ export default function App() {
           <Hero />
           <Services />
           <Pricing />
-          <BehanceGallery />
           <Portfolio />
           <About />
           <Contact />
