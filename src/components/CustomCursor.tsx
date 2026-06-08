@@ -1,15 +1,11 @@
 import { useState, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { motion, useMotionValue } from "motion/react";
 
 export function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-
-  // Smooth spring physics for the cursor trail
-  const smoothX = useSpring(mouseX, { stiffness: 300, damping: 20, mass: 0.5 });
-  const smoothY = useSpring(mouseY, { stiffness: 300, damping: 20, mass: 0.5 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -42,31 +38,33 @@ export function CustomCursor() {
   }, [mouseX, mouseY]);
 
   return (
-    <>
-      <motion.div
-        className="fixed top-0 left-0 w-3 h-3 bg-chrome rounded-full pointer-events-none z-[9999] mix-blend-difference"
-        style={{
-          x: mouseX,
-          y: mouseY,
-          translateX: "-50%",
-          translateY: "-50%",
+    <motion.div
+      className="hidden md:block fixed top-0 left-0 pointer-events-none z-[9999]"
+      style={{
+        x: mouseX,
+        y: mouseY,
+      }}
+    >
+      <svg 
+        width="40" 
+        height="40" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+        className={`transition-all duration-300 ${isHovering ? "drop-shadow-[0_0_12px_rgba(246,133,31,0.9)]" : "drop-shadow-[0_0_6px_rgba(255,255,255,0.4)]"}`}
+        style={{ 
+          transform: `translate(-5px, -5px) ${isHovering ? "scale(1.2) rotate(-5deg)" : "scale(1)"}`,
+          transformOrigin: "5px 5px"
         }}
-      />
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-chrome/50 pointer-events-none z-[9998]"
-        style={{
-          x: smoothX,
-          y: smoothY,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{
-          scale: isHovering ? 2 : 1,
-          backgroundColor: isHovering ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0)",
-          borderWidth: isHovering ? "0px" : "1px",
-        }}
-        transition={{ duration: 0.2 }}
-      />
-    </>
+      >
+        <path 
+          d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" 
+          fill={isHovering ? "#F6851F" : "#ffffff"} 
+          stroke={isHovering ? "#F6851F" : "#ffffff"} 
+          strokeWidth="1.5" 
+          strokeLinejoin="round"
+        />
+      </svg>
+    </motion.div>
   );
 }
