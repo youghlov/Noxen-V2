@@ -172,6 +172,15 @@ function PricingCard({ tier, index, isInView, isAnnual }: { tier: any, index: nu
            ))}
          </ul>
        </div>
+
+       <div className="relative z-10 mt-8 pt-6 border-t border-white/10">
+         <a 
+           href="#contact" 
+           className={`block w-full text-center py-4 px-6 font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 ${tier.highlighted ? 'bg-noxen text-deep hover:bg-white hover:text-deep shadow-[0_0_20px_rgba(246,133,31,0.3)]' : 'bg-white/5 border border-white/10 text-white hover:bg-white hover:text-deep'}`}
+         >
+           C'est parti !
+         </a>
+       </div>
        
        {/* Decorative corner accents */}
        <div className={`absolute top-0 left-0 w-3 h-3 border-t border-l transition-colors duration-300 ${tier.highlighted ? 'border-noxen' : 'border-chrome/30 group-hover:border-chrome/60'}`} />
