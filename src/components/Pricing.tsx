@@ -1,6 +1,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef, useState } from "react";
 import { Check } from "lucide-react";
+import { PricingFormModal } from "./PricingFormModal";
 
 const pricingTiers = [
   {
@@ -52,6 +53,14 @@ export function Pricing() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   const [isAnnual, setIsAnnual] = useState(false);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("NOXEN START");
+
+  const handleOpenModal = (planName: string) => {
+    setSelectedPlan(planName);
+    setIsModalOpen(true);
+  };
 
   return (
     <section id="pricing" className="relative w-full py-24 bg-deep/95 text-white border-t border-white/5 overflow-hidden">
@@ -104,15 +113,22 @@ export function Pricing() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center lg:items-stretch">
             {pricingTiers.map((tier, index) => (
-               <PricingCard key={index} tier={tier} index={index} isInView={isInView} isAnnual={isAnnual} />
+               <PricingCard key={index} tier={tier} index={index} isInView={isInView} isAnnual={isAnnual} onSelectPlan={handleOpenModal} />
             ))}
           </div>
        </div>
+
+       <PricingFormModal 
+         isOpen={isModalOpen} 
+         onClose={() => setIsModalOpen(false)} 
+         selectedPlan={selectedPlan}
+         isAnnual={isAnnual}
+       />
     </section>
   );
 }
 
-function PricingCard({ tier, index, isInView, isAnnual }: { tier: any, index: number, isInView: boolean, isAnnual: boolean }) {
+function PricingCard({ tier, index, isInView, isAnnual, onSelectPlan }: { tier: any, index: number, isInView: boolean, isAnnual: boolean, onSelectPlan: (plan: string) => void }) {
   const currentPrice = isAnnual ? tier.basePrice * 0.7 : tier.basePrice;
   const formattedPrice = new Intl.NumberFormat('fr-FR').format(currentPrice).replace(',', ' ');
   return (
@@ -174,12 +190,12 @@ function PricingCard({ tier, index, isInView, isAnnual }: { tier: any, index: nu
        </div>
 
        <div className="relative z-10 mt-8 pt-6 border-t border-white/10">
-         <a 
-           href="#contact" 
+         <button 
+           onClick={() => onSelectPlan(tier.name)}
            className={`block w-full text-center py-4 px-6 font-sans text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 ${tier.highlighted ? 'bg-noxen text-deep hover:bg-white hover:text-deep shadow-[0_0_20px_rgba(246,133,31,0.3)]' : 'bg-white/5 border border-white/10 text-white hover:bg-white hover:text-deep'}`}
          >
            C'est parti !
-         </a>
+         </button>
        </div>
        
        {/* Decorative corner accents */}

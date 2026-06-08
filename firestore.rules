@@ -23,9 +23,22 @@ service cloud.firestore {
              data.createdAt == request.time;
     }
 
+    function isValidQuoteRequest(data) {
+      return data.keys().hasAll(['name', 'email', 'plan', 'billing', 'createdAt']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 150 &&
+             data.email is string && data.email.size() > 0 && data.email.size() <= 150 &&
+             data.plan is string && data.plan.size() > 0 && data.plan.size() <= 100 &&
+             data.billing is string && data.billing.size() > 0 && data.billing.size() <= 50;
+    }
+
     match /contact_submissions/{submissionId} {
       // Allow anybody to create a contact submission
       allow create: if isValidId(submissionId) && isValidContactSubmission(incoming());
+    }
+
+    match /quote_requests/{requestId} {
+      // Allow anybody to create a quote request
+      allow create: if isValidId(requestId) && isValidQuoteRequest(incoming());
     }
   }
 }
